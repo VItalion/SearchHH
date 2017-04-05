@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SearchHH"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Search HH" Height="Auto" Width="Auto">
+    <DockPanel>
+        <TextBox x:Name="seatchBox" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25" Margin="5" KeyUp="seatchBox_KeyUp"/>
+        <Button x:Name="searchButton" Content="Search" DockPanel.Dock="Top" Click="searchButton_Click" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" Margin="5"/>
+        <!--<TextBox x:Name="responeBox" Margin="5,5,5,5" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+        <ListView ItemsSource="{Binding}" MouseDoubleClick="ListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Path=Name}" Width="200"/>
+                    <GridViewColumn Header="Город" DisplayMemberBinding="{Binding Path=Area.Name}" Width="150"/>
+                    <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Path=Snippet.Requirement}" Width="500"/>
+                    <GridViewColumn Header="ЗП" DisplayMemberBinding="{Binding Path=Salary.From}" Width="70"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
 </Window>

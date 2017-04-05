@@ -23,6 +23,30 @@ namespace SearchHH
         public MainWindow()
         {
             InitializeComponent();
+
+            seatchBox.Focus();
+        }
+
+        private async void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Responce res = await API.Instance.Get($"vacancies?text={seatchBox.Text}&per_page=500&");
+
+            DataContext = res.Items;
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DetailView window = new DetailView();
+            window.DataContext = (sender as ListView).SelectedItem;
+            window.Show();
+        }
+
+        private void seatchBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                searchButton_Click(null, null);
+
+            e.Handled = true;
         }
     }
 }
